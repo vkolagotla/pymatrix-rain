@@ -37,6 +37,26 @@ EXT_CHAR_LIST = ["Ç", "È", "Ì", "Í", "Ð", "Ñ", "Ò", "×", "Ø", "Ù", "Ú
                  "Ž", "ž", "ș", "ț", "ë", "Ĉ", "Ď", "ď", "Ġ", "Ř", "°", "«",
                  "±", "Δ", "Ξ", "Λ", ]
 
+EXT_CHAR_LIST_HINDI = ["अ", "आ", "इ", "ई", "उ", "ऊ", "ऋ", "ए", "ऐ", "ओ", "औ", "क",
+                          "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट", "ठ",
+                            "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब",
+                            "भ", "म", "य", "र", "ल", "व", "श", "ष", "स", "ह", "ळ",
+                            "क्ष", "त्र", "ज्ञ", "अं", "अः", "ऋ", "ऌ", "ऑ", "ऒ", ]
+
+EXT_CHAR_LIST_TELUGU = ["అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ",
+                            "క", "ఖ", "గ", "ఘ", "ఙ", "చ", "ఛ", "జ", "ఝ", "ఞ", "ట",
+                            "ఠ", "డ", "ఢ", "ణ", "త", "థ", "ద", "ధ", "న", "ప", "ఫ",
+                            "బ", "భ", "మ", "య", "ర", "ల", "వ", "శ", "ష", "స", "హ",
+                            "ళ", "క్ష", "త్ర", "జ్ఞ", "అం", "అః", "ఋ", "ఌ", "ఒ", ]
+
+EXT_CHAR_LIST_IND = EXT_CHAR_LIST_HINDI + EXT_CHAR_LIST_TELUGU
+
+EXT_CHAR_LIST_CHINESE = ["啊", "阿", "埃", "挨", "哎", "唉", "哀", "皑", "癌", "蔼", "矮", "艾",
+                                "碍", "爱", "隘", "鞍", "氨", "安", "俺", "按", "暗", "岸", "胺",
+                                "案", "肮", "昂", "盎", "凹", "敖", "熬", "翱", "袄", "傲", "奥",
+                                "懊", "澳", "芭", "捌", "扒", "叭", "吧", "笆", "八", "疤", "巴",
+                                "拔", "跋", "靶", "把", "耙", "坝", "霸", "罢", "爸", "白", "柏",]
+
 KATAKANA_CHAR_LIST = ["ｦ", "ｱ", "ｳ", "ｴ", "ｵ", "ｶ", "ｷ", "ｹ", "ｺ", "ｻ", "ｼ",
                       "ｽ", "ｾ", "ｿ", "ﾀ", "ﾂ", "ﾃ", "ﾅ", "ﾆ", "ﾇ", "ﾈ", "ﾊ",
                       "ﾋ", "ﾎ", "ﾏ", "ﾐ", "ﾑ", "ﾒ", "ﾓ", "ﾔ", "ﾕ", "ﾗ", "ﾘ",
@@ -177,7 +197,7 @@ def build_character_set2(args: argparse.Namespace):
     elif args.ext_only:
         if args.test_mode:
             return ["Ä"]
-        return EXT_CHAR_LIST
+        return EXT_CHAR_LIST + EXT_CHAR_LIST_IND + EXT_CHAR_LIST_CHINESE
     elif args.Katakana_only:
         if args.test_mode:
             return ["ﾎ", "0"]
@@ -189,7 +209,7 @@ def build_character_set2(args: argparse.Namespace):
     elif args.ext:
         if args.test_mode:
             return ["Ä", "T"]
-        return CHAR_LIST + EXT_CHAR_LIST
+        return CHAR_LIST + EXT_CHAR_LIST + EXT_CHAR_LIST_IND + EXT_CHAR_LIST_CHINESE
     elif args.katakana:
         if args.test_mode:
             return ["T", "ﾎ"]
@@ -685,7 +705,7 @@ def argument_parsing(
                         type=positive_int_zero_to_nine,
                         default=4,
                         help="Set the delay (speed)"
-                             " 0: Fast, 4: Default, 9: Slow")
+                             " 0: Fast, 5: Default, 9: Slow")
     parser.add_argument("-b", dest="bold_on", action="store_true",
                         help="Bold characters on")
     parser.add_argument("-B", dest="bold_all", action="store_true",
