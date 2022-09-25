@@ -197,7 +197,7 @@ def build_character_set2(args: argparse.Namespace):
     elif args.ext_only:
         if args.test_mode:
             return ["Ä"]
-        return EXT_CHAR_LIST + EXT_CHAR_LIST_IND + EXT_CHAR_LIST_CHINESE
+        return EXT_CHAR_LIST
     elif args.Katakana_only:
         if args.test_mode:
             return ["ﾎ", "0"]
@@ -209,7 +209,7 @@ def build_character_set2(args: argparse.Namespace):
     elif args.ext:
         if args.test_mode:
             return ["Ä", "T"]
-        return CHAR_LIST + EXT_CHAR_LIST + EXT_CHAR_LIST_IND + EXT_CHAR_LIST_CHINESE
+        return CHAR_LIST + EXT_CHAR_LIST
     elif args.katakana:
         if args.test_mode:
             return ["T", "ﾎ"]
@@ -217,7 +217,7 @@ def build_character_set2(args: argparse.Namespace):
     else:
         if args.test_mode:
             return ["T"]
-        return CHAR_LIST
+        return CHAR_LIST + EXT_CHAR_LIST_IND + EXT_CHAR_LIST_CHINESE
 
 
 def matrix_loop(screen, args: argparse.Namespace) -> None:
@@ -703,7 +703,7 @@ def argument_parsing(
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", dest="delay",
                         type=positive_int_zero_to_nine,
-                        default=4,
+                        default=5,
                         help="Set the delay (speed)"
                              " 0: Fast, 5: Default, 9: Slow")
     parser.add_argument("-b", dest="bold_on", action="store_true",
